@@ -5,14 +5,14 @@ namespace Katas
 {
     public class Roman
     {
-        private static Dictionary<string, int> romanValues = new Dictionary<string, int>
+        private static List<Token> romanValues = new List<Token>()
         {
-            {"L", 50},
-            {"X", 10},
-            {"IX", 9},
-            {"V", 5},
-            {"IV", 4},
-            {"I", 1},
+            new Token("L", 50),
+            new Token("X", 10),
+            new Token("IX", 9),
+            new Token("V", 5),
+            new Token("IV", 4),
+            new Token("I", 1),
         };
         
         static void Main(string[] args)
@@ -22,50 +22,42 @@ namespace Katas
         public static int ToInt(string numeral)
         {
             var result = 0;
-            
-            while (numeral.StartsWith("L"))
-            {
-                result += romanValues["L"];
-                numeral = numeral.Substring("L".Length);
-            }
-            
-            while (numeral.StartsWith("X"))
-            {
-                result += 10;
-                numeral = numeral.Substring(1);
-            }
-            
-            if (numeral.StartsWith("IX"))
-            {
-                result += 9;
-                numeral = numeral.Substring(2);
-            }
-            
-            if (numeral.StartsWith("V"))
-            {
-                result += 5;
-                numeral = numeral.Substring(1);
+
+            foreach(var token in romanValues) {
+                while(numeral.StartsWith(token.Roman)) {
+                    result += token.Arabic;
+                    numeral = numeral.Substring(token.Roman.Length);
+                }
             }
 
-            if (numeral.StartsWith("IV"))
-            {
-                result += 4;
-                numeral = numeral.Substring(2);
-            }
-
-            return result + numeral.Length;
+            return result;
         }
+
+
+
 
         public static string Add(string numeral1, string numeral2)
         {
-            if (numeral1 == "IV" && numeral2 == "V") return "IX";
-            return numeral1 == "XV" ? "XX" : 
-                $"{numeral1}{numeral2}";
+            int value = ToInt(numeral1) + ToInt(numeral2);
+            string roman = "";
+
+            foreach(var token in romanValues) {
+                while (token.Arabic <= value) {
+                    roman += token.Roman;
+                    value -= token.Arabic;
+                }
+            }
+
+            return roman;
         }
     }
 
-    internal class RomanArabicToken
+    internal class Token
     {
+        public Token(string r, int a) {
+            Roman = r;
+            Arabic = a;
+        }
         public string Roman { get; set; }
         public int Arabic { get; set; }
     }

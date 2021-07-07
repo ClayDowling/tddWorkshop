@@ -44,8 +44,14 @@ namespace Katas
         [InlineData ("XX", 20)]
         [InlineData ("XXVI", 26)]
         [InlineData ("L", 50)]
-        public void ToInt_GivenI_Returns1(string roman, int arabic) {
+        public void ToInt_GivenRoman_ReturnsInt(string roman, int arabic) {
             Roman.ToInt(roman).Should().Be(arabic);
+        }
+
+        [Fact]
+        public void Add_GivenXLandV_returnsXLV()
+        {
+            Roman.Add("XL", "V").Should().Be("XLV");
         }
 
     }
