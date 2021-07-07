@@ -24,6 +24,12 @@ namespace Katas
             calculator.Add("XV", "V").Should().Be("XX");
         }
 
+        [Fact]
+        public void FourPlusFiveIsNine()
+        {
+            calculator.Add("IV", "V").Should().Be("IX");
+        }
+        
         private RomanNumeralsCalculator calculator = new RomanNumeralsCalculator();
         
     }
