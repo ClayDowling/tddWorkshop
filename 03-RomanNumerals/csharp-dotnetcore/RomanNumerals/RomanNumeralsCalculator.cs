@@ -7,13 +7,15 @@ namespace Katas
     {
         private static List<Token> romanValues = new List<Token>()
         {
+            new Token("C",100),
+            new Token("XC",90),
             new Token("L", 50),
             new Token("XL", 40),
             new Token("X", 10),
             new Token("IX", 9),
             new Token("V", 5),
             new Token("IV", 4),
-            new Token("I", 1),
+            new Token("I", 1)
         };
         
         static void Main(string[] args)
