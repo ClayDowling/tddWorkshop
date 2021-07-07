@@ -6,7 +6,7 @@
 
         public Gpio(int pin)
         {
-            Pin = -1;
+            Pin = pin;
         }
 
         public GpioState State()

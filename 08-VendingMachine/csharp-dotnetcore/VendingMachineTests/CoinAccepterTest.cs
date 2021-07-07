@@ -20,6 +20,9 @@ namespace VendingMachineTests
             _accepter.Setup();
             
             _accepter.Coin1.Pin.Should().Be(13);
+            _accepter.Coin2.Pin.Should().Be(14);
+            _accepter.Coin3.Pin.Should().Be(15);
+            _accepter.Coin4.Pin.Should().Be(16);
         }
     }
 }
