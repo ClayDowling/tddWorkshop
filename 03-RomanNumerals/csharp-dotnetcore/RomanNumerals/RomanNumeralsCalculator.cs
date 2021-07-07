@@ -7,6 +7,9 @@ namespace Katas
     {
         private static List<Token> romanValues = new List<Token>()
         {
+            new Token("CM", 900),
+            new Token("D", 500),
+            new Token("CD", 400),
             new Token("C",100),
             new Token("XC",90),
             new Token("L", 50),
