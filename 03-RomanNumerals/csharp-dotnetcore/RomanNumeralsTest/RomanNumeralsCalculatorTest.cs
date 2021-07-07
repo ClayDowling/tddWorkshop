@@ -18,6 +18,12 @@ namespace Katas
             calculator.Add("I", "II").Should().Be("III");
         }
         
+        [Fact]
+        public void FifteenPlusFiveGivesTwenty()
+        {
+            calculator.Add("XV", "V").Should().Be("XX");
+        }
+
         private RomanNumeralsCalculator calculator = new RomanNumeralsCalculator();
         
     }

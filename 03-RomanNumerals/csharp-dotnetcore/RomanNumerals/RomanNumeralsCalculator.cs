@@ -9,7 +9,7 @@ namespace Katas
         }
 
         public string Add(string numeral1, string numeral2){
-            return "II";
+            return $"{numeral1}{numeral2}";
         }
     }
 }
