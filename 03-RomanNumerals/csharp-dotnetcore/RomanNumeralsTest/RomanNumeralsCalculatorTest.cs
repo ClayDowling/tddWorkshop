@@ -9,28 +9,44 @@ namespace Katas
         [Fact]
         public void OnePlusOne()
         {
-            calculator.Add("I", "I").Should().Be("II");
+            Roman.Add("I", "I").Should().Be("II");
         }
         
         [Fact]
         public void OnePlusTwo()
         {
-            calculator.Add("I", "II").Should().Be("III");
+            Roman.Add("I", "II").Should().Be("III");
         }
         
         [Fact]
         public void FifteenPlusFiveGivesTwenty()
         {
-            calculator.Add("XV", "V").Should().Be("XX");
+            Roman.Add("XV", "V").Should().Be("XX");
         }
 
         [Fact]
         public void FourPlusFiveIsNine()
         {
-            calculator.Add("IV", "V").Should().Be("IX");
+            Roman.Add("IV", "V").Should().Be("IX");
         }
-        
-        private RomanNumeralsCalculator calculator = new RomanNumeralsCalculator();
-        
+
+        [Theory]
+        [InlineData ("I", 1)]
+        [InlineData ("II", 2)]
+        [InlineData ("III", 3)]
+        [InlineData ("IV", 4)]
+        [InlineData ("V", 5)]
+        [InlineData ("VI", 6)]
+        [InlineData ("VII", 7)]
+        [InlineData ("IX", 9)]
+        [InlineData ("X", 10)]
+        [InlineData ("XI", 11)]
+        [InlineData ("XX", 20)]
+        [InlineData ("XXVI", 26)]
+        [InlineData ("L", 50)]
+        public void ToInt_GivenI_Returns1(string roman, int arabic) {
+            Roman.ToInt(roman).Should().Be(arabic);
+        }
+
     }
 }
