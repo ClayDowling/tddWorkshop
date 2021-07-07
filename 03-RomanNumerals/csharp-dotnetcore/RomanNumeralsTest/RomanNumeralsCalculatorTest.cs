@@ -54,5 +54,10 @@ namespace Katas
             Roman.Add("XL", "V").Should().Be("XLV");
         }
 
+        [Fact]
+        public void Add_GivenXCandX_returnsC()
+        {
+            Roman.Add("XC", "X").Should().Be("C");
+        }
     }
 }
