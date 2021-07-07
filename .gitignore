@@ -5,6 +5,7 @@
 bin
 out
 build
+*.user
 .settings
 .idea
 .iml

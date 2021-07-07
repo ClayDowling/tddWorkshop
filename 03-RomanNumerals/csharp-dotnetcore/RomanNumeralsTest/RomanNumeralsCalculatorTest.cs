@@ -7,12 +7,12 @@ namespace Katas
     public class RomanNumeralsTest
     {
         [Fact]
-        public void TestMethod1()
+        public void OnePlusOne()
         {
-            RomanNumeralsCalculator calculator = new RomanNumeralsCalculator();
-            string actualResult = calculator.add("I", "I");
-
-            actualResult.Should().Be("II");
+            calculator.Add("I", "I").Should().Be("II");
         }
+        
+        private RomanNumeralsCalculator calculator = new RomanNumeralsCalculator();
+        
     }
 }

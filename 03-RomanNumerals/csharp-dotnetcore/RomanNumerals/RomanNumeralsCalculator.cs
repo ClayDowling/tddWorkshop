@@ -8,8 +8,8 @@ namespace Katas
         {
         }
 
-        public string add(string numeral1, string numeral2){
-            return null;
+        public string Add(string numeral1, string numeral2){
+            return "II";
         }
     }
 }
