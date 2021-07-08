@@ -35,43 +35,36 @@ namespace VendingMachineTests
         
         // TODO: allow for different GPIO wiring
 
-        [Fact]
-        public void DetectsNickle()
+        [Theory]
+        [InlineData("Nickel", 5, 21.21, 5)]
+        [InlineData("Dime", 2.268, 17.91, 10)]
+        [InlineData("Quarter", 5.670, 24.26, 25)]
+        [InlineData("Half-Dollar", 11.340, 30.61, 50)]
+        public void AcceptsUsaCoins(string name, double weightGrams, double diameterMm, int expectedValue)
         {
-            _accepter.DropCoin(5, 21.21);
+            _accepter.DropCoin(weightGrams, diameterMm);
             
-            _cashDropped.Should().Be(5);
-        }
-
-        [Fact]
-        public void DetectsDime()
-        {
-            _accepter.DropCoin(2.268, 17.91);
-            
-            _cashDropped.Should().Be(10);
+            _cashDropped.Should().Be(expectedValue);            
         }
         
-        [Fact]
-        public void DetectsQuarter()
-        {
-            _accepter.DropCoin(5.670, 24.26);
-            
-            _cashDropped.Should().Be(25);
-        }
-        
-        [Fact]
-        public void DetectsHalfDollar()
-        {
-            _accepter.DropCoin(11.340, 30.61);
-            
-            _cashDropped.Should().Be(50);
-        }
-
         [Fact]
         public void RejectsPenney()
         {
             _accepter.DropCoin(2.5, 0.750);
             
+            _cashDropped.Should().Be(0);
+            // TODO: verify coin return triggered?
+        }
+
+        [Theory]
+        [InlineData("Penny", 2.35, 19.05)]
+        [InlineData("Nickle", 3.95, 21.2)]
+        [InlineData("Dime", 1.75, 18.03)]
+        [InlineData("Quarter", 4.4, 23.88)]
+        [InlineData("Half-Dollar", 6.9, 27.13)]
+        public void RejectsCanadianCoins(string name, double weightGrams, double diameterMm)
+        {
+            _accepter.DropCoin(weightGrams, diameterMm);
             _cashDropped.Should().Be(0);
             // TODO: verify coin return triggered?
         }
