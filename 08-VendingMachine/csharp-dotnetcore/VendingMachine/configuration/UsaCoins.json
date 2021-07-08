@@ -1,0 +1,22 @@
+[
+  {
+    "sensor": 1,
+    "weight_grams": 5.000,
+    "diameter_mm": 21.21
+  },
+  {
+    "sensor": 2,
+    "weight_grams": 2.268,
+    "diameter_mm": 17.91
+  },
+  {
+    "sensor": 3,
+    "weight_grams": 5.670,
+    "diameter_mm": 24.26
+  },
+  {
+    "sensor": 4,
+    "weight_grams": 11.340,
+    "diameter_mm": 30.61
+  }
+]
