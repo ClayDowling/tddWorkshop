@@ -7,6 +7,12 @@ namespace VendingMachineTests
     public class DisplayTest
     {
         [Fact]
+        public void DefaultDisplay()
+        {
+            _display.Value().Should().Be("Insert Coin");
+        }
+        
+        [Fact]
         public void TwoNicklesDimeQuarterDisplays45Cents()
         {
             _display.ReceivesSignal("45");
@@ -20,7 +26,7 @@ namespace VendingMachineTests
             _display.Value().Should().Be("10 cents");
         }
         
-        private readonly Display _display = new();
+        private readonly Display _display = new(null);
 
     }
 }

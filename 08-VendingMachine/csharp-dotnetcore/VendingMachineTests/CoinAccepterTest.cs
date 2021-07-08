@@ -1,5 +1,6 @@
 using System;
 using FluentAssertions;
+using NSubstitute;
 using VendingMachine;
 using Xunit;
 
@@ -7,49 +8,46 @@ namespace VendingMachineTests
 {
     public class CoinAccepterTest
     {
-        private const double NickelWeight = 5.000;
-        private const double NickelDiameter = 21.21;
-        private const double DimeWeight = 2.268;
-        private const double DimeDiameter = 17.91;
-        private const double QuarterWeight = 5.670;
-        private const double QuarterDiameter = 24.26;
-        private const int MagicTokenWeight = 8;
-        private const int MagicCoinDiameter = 30;
         private CoinAccepter _accepter;
+        private ISerialSender _serialSender;
 
         public CoinAccepterTest()
         {
-            _accepter = new CoinAccepter();
+            _serialSender = Substitute.For<ISerialSender>();
+            _accepter = new CoinAccepter(_serialSender);
         }
         
         [Theory]
-        [InlineData("Nickel", NickelWeight, NickelDiameter, 5)]
-        [InlineData("Dime", DimeWeight, DimeDiameter, 10)]
-        [InlineData("Quarter", QuarterWeight, QuarterDiameter, 25)]
-        [InlineData("MagicToken", MagicTokenWeight, MagicCoinDiameter, 100)]
-        public void AcceptsUsaCoins(string name, double weightGrams, double diameterMm, int expectValueCents)
+        [InlineData("Nickel", Constants.NickelWeight, Constants.NickelDiameter, "5")]
+        [InlineData("Dime", Constants.DimeWeight, Constants.DimeDiameter, "10")]
+        [InlineData("Quarter", Constants.QuarterWeight, Constants.QuarterDiameter, "25")]
+        [InlineData("MagicToken", Constants.MagicTokenWeight, Constants.MagicCoinDiameter, "100")]
+        public void AcceptsUsaCoins(string name, double weightGrams, double diameterMm, string expectValueCents)
         {
             _accepter.DropCoin(weightGrams, diameterMm);
-            _accepter.Value().Should().Be(expectValueCents);
+            _serialSender.Received(1).Send(expectValueCents);
         }
 
         [Fact]
         public void RejectsSlug()
         {
             _accepter.DropCoin(5.7, 18);
-            _accepter.Value().Should().Be(0);
+            _serialSender.Received(0).Send(Arg.Any<string>());
             // TODO: verify coin return?
         }
 
         [Fact]
         public void AccumulatesCoins()
         {
-            _accepter.DropCoin(NickelWeight, NickelDiameter);
-            _accepter.DropCoin(NickelWeight, NickelDiameter);
-            _accepter.DropCoin(DimeWeight, DimeDiameter);
-            _accepter.DropCoin(QuarterWeight, QuarterDiameter);
+            _accepter.DropCoin(Constants.NickelWeight, Constants.NickelDiameter);
+            _accepter.DropCoin(Constants.NickelWeight, Constants.NickelDiameter);
+            _accepter.DropCoin(Constants.DimeWeight, Constants.DimeDiameter);
+            _accepter.DropCoin(Constants.QuarterWeight, Constants.QuarterDiameter);
 
-            _accepter.Value().Should().Be(45);
+            _serialSender.Received(1).Send("5");
+            _serialSender.Received(1).Send("10");
+            _serialSender.Received(1).Send("20");
+            _serialSender.Received(1).Send("45");
         }
     }
 }

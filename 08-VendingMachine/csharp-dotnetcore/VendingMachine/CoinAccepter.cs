@@ -5,7 +5,13 @@ namespace VendingMachine
     public class CoinAccepter
     {
         private int _value;
+        private readonly ISerialSender _serialSender;
 
+        public CoinAccepter(ISerialSender serialSender)
+        {
+            _serialSender = serialSender;
+        }
+        
         private static List<CoinSpecification> coinSpecs = new List<CoinSpecification>
         {
             new CoinSpecification(5.000, 21.21, 5),
@@ -13,10 +19,13 @@ namespace VendingMachine
             new CoinSpecification(5.670, 24.26, 25),
             new CoinSpecification(8, 30, 100)
         };
-
+        
         public void DropCoin(double weightGrams, double diameterMm)
         {
-            _value += GetValueForCoin(weightGrams, diameterMm);
+            var coinValue = GetValueForCoin(weightGrams, diameterMm);
+            if (coinValue <= 0) return;
+            _value += coinValue;
+            _serialSender.Send($"{_value}");
         }
 
         private int GetValueForCoin(double weightGrams, double diameterMm)
@@ -43,10 +52,6 @@ namespace VendingMachine
             return false;
         }
 
-        public int Value()
-        {
-            return _value;
-        }
     }
 
     internal class CoinSpecification

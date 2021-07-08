@@ -15,8 +15,5 @@
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=80909010_002D4d05_002D4673_002D9b41_002Dc4e29f822926/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Foo #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;TestAncestor&gt;
-    &lt;TestId&gt;xUnit::6277EEA8-9FC4-427A-869F-DBA1DD358F61::net5.0::VendingMachineTests.CoinAccepterTest&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::6277EEA8-9FC4-427A-869F-DBA1DD358F61::net5.0::VendingMachineTests.DisplayTest&lt;/TestId&gt;
-  &lt;/TestAncestor&gt;
+  &lt;Solution /&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
