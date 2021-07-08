@@ -66,6 +66,15 @@ namespace VendingMachineTests
             
             _cashDropped.Should().Be(50);
         }
+
+        [Fact]
+        public void RejectsPenney()
+        {
+            _accepter.DropCoin(2.5, 0.750);
+            
+            _cashDropped.Should().Be(0);
+            // TODO: verify coin return triggered?
+        }
         
         private void ProcessNickle()
         {

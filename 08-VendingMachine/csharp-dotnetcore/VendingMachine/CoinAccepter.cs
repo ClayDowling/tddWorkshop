@@ -38,7 +38,8 @@ namespace VendingMachine
                 }
             }
 
-            CoinSensors[sensor-1].State = GpioState.HIGH;
+            if (sensor > 0)
+                CoinSensors[sensor-1].State = GpioState.HIGH;
         }
 
         private static bool IsInTolerance(double weightGrams, double diameter, CoinSensor coinSensor)
