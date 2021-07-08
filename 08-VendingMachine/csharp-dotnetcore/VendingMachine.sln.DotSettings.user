@@ -1,0 +1,21 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=174f1bd5_002D417a_002D4f37_002D8ba5_002D68fc1b2788bd/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Foo #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::6277EEA8-9FC4-427A-869F-DBA1DD358F61::net5.0::VendingMachineTests.CoinAccepterTest.Foo&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=567c0a90_002D13b3_002D48e0_002Db152_002Da69d1d23e358/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Foo" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::6277EEA8-9FC4-427A-869F-DBA1DD358F61::net5.0::VendingMachineTests.CoinAccepterTest.Foo&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=7f967fed_002D7c23_002D4a2c_002Da2af_002D94a85779a744/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="CoinAccepterTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::6277EEA8-9FC4-427A-869F-DBA1DD358F61::net5.0::VendingMachineTests.CoinAccepterTest&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=80909010_002D4d05_002D4673_002D9b41_002Dc4e29f822926/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Foo #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::6277EEA8-9FC4-427A-869F-DBA1DD358F61::net5.0::VendingMachineTests.CoinAccepterTest&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
