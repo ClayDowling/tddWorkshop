@@ -31,7 +31,7 @@ namespace VendingMachine
             var sensor = 0;
             foreach (var coinSensor in _coinSensorConfig)
             {
-                if (coinSensor.weight_grams - .001 < weightGrams  && weightGrams < coinSensor.weight_grams + .001)
+                if (IsInTolerance(weightGrams, diameter, coinSensor))
                 {
                     sensor = coinSensor.sensor;
                     break;
@@ -39,6 +39,12 @@ namespace VendingMachine
             }
 
             CoinSensors[sensor-1].State = GpioState.HIGH;
+        }
+
+        private static bool IsInTolerance(double weightGrams, double diameter, CoinSensor coinSensor)
+        {
+            return coinSensor.weight_grams - .001 < weightGrams  && weightGrams < coinSensor.weight_grams + .001
+                && coinSensor.diameter_mm - .001 < diameter && diameter < coinSensor.diameter_mm + .001;
         }
     }
 }
