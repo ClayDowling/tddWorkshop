@@ -1,8 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.IO;
 using FluentAssertions;
-using Newtonsoft.Json;
 using VendingMachine;
 using Xunit;
 
@@ -18,19 +15,19 @@ namespace VendingMachineTests
             _accepter = new CoinAccepter();
             _accepter.Setup("UsaCoins");
             _cashDropped = 0;
-            _accepter.CoinSensors[0].AttachInterrupt(ProcessNickle, GpioState.HIGH);
-            _accepter.CoinSensors[1].AttachInterrupt(ProcessDime, GpioState.HIGH);
-            _accepter.CoinSensors[2].AttachInterrupt(ProcessQuarter, GpioState.HIGH);
-            _accepter.CoinSensors[3].AttachInterrupt(ProcessHalfDollar, GpioState.HIGH);
+            _accepter.CoinSensorGpios[0].AttachInterrupt(ProcessNickle, GpioState.HIGH);
+            _accepter.CoinSensorGpios[1].AttachInterrupt(ProcessDime, GpioState.HIGH);
+            _accepter.CoinSensorGpios[2].AttachInterrupt(ProcessQuarter, GpioState.HIGH);
+            _accepter.CoinSensorGpios[3].AttachInterrupt(ProcessHalfDollar, GpioState.HIGH);
         }
         
         [Fact]
         public void Setup_byDefault_InitializesCoinGpiosToPins13to16()
         {
-            _accepter.CoinSensors[0].Pin.Should().Be(13);
-            _accepter.CoinSensors[1].Pin.Should().Be(14);
-            _accepter.CoinSensors[2].Pin.Should().Be(15);
-            _accepter.CoinSensors[3].Pin.Should().Be(16);
+            _accepter.CoinSensorGpios[0].Pin.Should().Be(13);
+            _accepter.CoinSensorGpios[1].Pin.Should().Be(14);
+            _accepter.CoinSensorGpios[2].Pin.Should().Be(15);
+            _accepter.CoinSensorGpios[3].Pin.Should().Be(16);
         }
         
         // TODO: allow for different GPIO wiring
@@ -43,7 +40,6 @@ namespace VendingMachineTests
         public void AcceptsUsaCoins(string name, double weightGrams, double diameterMm, int expectedValue)
         {
             _accepter.DropCoin(weightGrams, diameterMm);
-            
             _cashDropped.Should().Be(expectedValue);            
         }
         
