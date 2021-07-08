@@ -28,9 +28,12 @@ there are no coins inserted, the machine displays INSERT COIN.
 Rejected coins
 are placed in the coin return.
 
-*NOTE:* See hardware specification above. Please note that the coin acceptor
-code *must* be a separate class from the vending machine logic code, because it
-will be installed on separate hardware.
+*NOTE:* Coin acceptors do not know about quarters, nickels, dimes, or game
+tokens.  They distinguish coins by a combination of diameter and weight.  Your
+code should reflect that for determining what kind of coin has been inserted.
+Most commercially available coin accepters can be programmed to accept any kind
+of coin, including arcade tokens.
+
 
 ### Select Product
 
