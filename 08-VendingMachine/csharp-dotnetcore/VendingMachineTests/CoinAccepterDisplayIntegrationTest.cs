@@ -9,21 +9,20 @@ namespace VendingMachineTests
     {
         private readonly CoinAccepter _accepter;
         private readonly Display _display;
-        private readonly ISerialSender _serialSender;
-        private readonly ISerialReceiver _serialReceiver;
+        private readonly SerialBus _serialBus;
 
         [Fact]
         public void CoinAccepterSendsMessageToDisplay()
         {
-            _accepter.DropCoin(1,2);
-            _display.Value().Should().Be("5 cents");
+            _accepter.DropCoin(Constants.NickelWeight,Constants.NickelDiameter);
+            _display.QueryDisplayForTesting().Should().Be("5 cents");
         }
 
         public CoinAccepterDisplayIntegrationTest()
         {
-            _serialSender = Substitute.For<ISerialSender>();
-            _accepter = new CoinAccepter(_serialSender);
-            _display = new Display(_serialReceiver);
+            _serialBus = new SerialBus();
+            _accepter = new CoinAccepter(_serialBus);
+            _display = new Display(_serialBus);
         }
     }
 }

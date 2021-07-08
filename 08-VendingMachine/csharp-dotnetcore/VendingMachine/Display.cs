@@ -1,24 +1,22 @@
+using System;
+
 namespace VendingMachine
 {
     public class Display
     {
-        private readonly ISerialReceiver _serialReceiver;
-        private string _value;
+        private readonly SerialBus _serialBus;
         private const string DefaultDisplay = "Insert Coin";
 
-        public Display(ISerialReceiver serialReceiver)
+        public Display(SerialBus serialBus)
         {
-            _serialReceiver = serialReceiver;
-            _value = DefaultDisplay;
-        }
-        public void ReceivesSignal(string signal)
-        {
-            _value = $"{signal} cents";
+            _serialBus = serialBus;
         }
 
-        public string Value()
+        public string QueryDisplayForTesting()
         {
-            return _value;
+            var message = _serialBus.Recv();
+            if (message == string.Empty) return DefaultDisplay;
+            return $"{message} cents";
         }
     }
 }

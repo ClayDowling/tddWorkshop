@@ -5,11 +5,11 @@ namespace VendingMachine
     public class CoinAccepter
     {
         private int _value;
-        private readonly ISerialSender _serialSender;
+        private readonly SerialBus _serialBus;
 
-        public CoinAccepter(ISerialSender serialSender)
+        public CoinAccepter(SerialBus serialBus)
         {
-            _serialSender = serialSender;
+            _serialBus = serialBus;
         }
         
         private static List<CoinSpecification> coinSpecs = new List<CoinSpecification>
@@ -25,7 +25,7 @@ namespace VendingMachine
             var coinValue = GetValueForCoin(weightGrams, diameterMm);
             if (coinValue <= 0) return;
             _value += coinValue;
-            _serialSender.Send($"{_value}");
+            _serialBus.Send($"{_value}");
         }
 
         private int GetValueForCoin(double weightGrams, double diameterMm)

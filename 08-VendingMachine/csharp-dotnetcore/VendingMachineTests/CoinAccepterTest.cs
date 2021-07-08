@@ -9,12 +9,12 @@ namespace VendingMachineTests
     public class CoinAccepterTest
     {
         private CoinAccepter _accepter;
-        private ISerialSender _serialSender;
+        private SerialBus _serialBus;
 
         public CoinAccepterTest()
         {
-            _serialSender = Substitute.For<ISerialSender>();
-            _accepter = new CoinAccepter(_serialSender);
+            _serialBus = new SerialBus();
+            _accepter = new CoinAccepter(_serialBus);
         }
         
         [Theory]
@@ -25,29 +25,27 @@ namespace VendingMachineTests
         public void AcceptsUsaCoins(string name, double weightGrams, double diameterMm, string expectValueCents)
         {
             _accepter.DropCoin(weightGrams, diameterMm);
-            _serialSender.Received(1).Send(expectValueCents);
+            _serialBus.Recv().Should().Be(expectValueCents);
         }
 
         [Fact]
         public void RejectsSlug()
         {
             _accepter.DropCoin(5.7, 18);
-            _serialSender.Received(0).Send(Arg.Any<string>());
-            // TODO: verify coin return?
+            _serialBus.Recv().Should().Be(String.Empty);
         }
 
         [Fact]
-        public void AccumulatesCoins()
+        public void PublishesMessagesForAccumulatesCoins()
         {
             _accepter.DropCoin(Constants.NickelWeight, Constants.NickelDiameter);
+            _serialBus.Recv().Should().Be("5");
             _accepter.DropCoin(Constants.NickelWeight, Constants.NickelDiameter);
+            _serialBus.Recv().Should().Be("10");
             _accepter.DropCoin(Constants.DimeWeight, Constants.DimeDiameter);
+            _serialBus.Recv().Should().Be("20");
             _accepter.DropCoin(Constants.QuarterWeight, Constants.QuarterDiameter);
-
-            _serialSender.Received(1).Send("5");
-            _serialSender.Received(1).Send("10");
-            _serialSender.Received(1).Send("20");
-            _serialSender.Received(1).Send("45");
+            _serialBus.Recv().Should().Be("45");
         }
     }
 }
