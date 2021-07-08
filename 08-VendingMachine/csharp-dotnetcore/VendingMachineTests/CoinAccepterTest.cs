@@ -20,6 +20,8 @@ namespace VendingMachineTests
             _cashDropped = 0;
             _accepter.CoinSensors[0].AttachInterrupt(ProcessNickle, GpioState.HIGH);
             _accepter.CoinSensors[1].AttachInterrupt(ProcessDime, GpioState.HIGH);
+            _accepter.CoinSensors[2].AttachInterrupt(ProcessQuarter, GpioState.HIGH);
+            _accepter.CoinSensors[3].AttachInterrupt(ProcessHalfDollar, GpioState.HIGH);
         }
         
         [Fact]
@@ -48,6 +50,23 @@ namespace VendingMachineTests
             
             _cashDropped.Should().Be(10);
         }
+        
+        [Fact]
+        public void DetectsQuarter()
+        {
+            _accepter.DropCoin(5.670, 24.26);
+            
+            _cashDropped.Should().Be(25);
+        }
+        
+        [Fact]
+        public void DetectsHalfDollar()
+        {
+            _accepter.DropCoin(11.340, 30.61);
+            
+            _cashDropped.Should().Be(50);
+        }
+        
         private void ProcessNickle()
         {
             _cashDropped += 5;
@@ -58,5 +77,14 @@ namespace VendingMachineTests
             _cashDropped += 10;
         }
         
+        private void ProcessQuarter()
+        {
+            _cashDropped += 25;
+        }
+        
+        private void ProcessHalfDollar()
+        {
+            _cashDropped += 50;
+        }
     }
 }
