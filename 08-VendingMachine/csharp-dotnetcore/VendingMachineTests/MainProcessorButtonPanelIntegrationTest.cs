@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using FluentAssertions;
+using VendingMachine;
 using Xunit;
 
 namespace VendingMachineTests

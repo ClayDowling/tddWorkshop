@@ -29,7 +29,7 @@ namespace VendingMachineTests
         public DisplayTest()
         {
             _serialBus = new SerialBus();
-            _display = new(_serialBus);
+            _display = new Display(_serialBus);
         }
         
         private readonly Display _display;

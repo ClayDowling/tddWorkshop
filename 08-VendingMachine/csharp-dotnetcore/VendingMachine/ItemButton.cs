@@ -1,4 +1,3 @@
-using VendingMachineTests;
 
 namespace VendingMachine
 {
@@ -17,10 +16,10 @@ namespace VendingMachine
             set
             {
                 _state = value;
-                Gpio.State = _state == ButtonState.Pressed ? GpioState.HIGH : GpioState.LOW;
+                Gpio.State = _state == ButtonState.Pressed ? GpioState.High : GpioState.Low;
             }
         }
 
-        public Gpio Gpio { get; private set; }
+        public Gpio Gpio { get; }
     }
 }

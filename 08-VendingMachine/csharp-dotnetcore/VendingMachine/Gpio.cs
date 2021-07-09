@@ -7,7 +7,7 @@ namespace VendingMachine
             Pin = pin;
         }
 
-        public int Pin { get; private set; }
+        public int Pin { get; }
         public GpioState State { get; set; }
     }
 }

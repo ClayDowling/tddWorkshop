@@ -12,12 +12,12 @@ namespace VendingMachine
             _serialBus = serialBus;
         }
         
-        private static List<CoinSpecification> coinSpecs = new List<CoinSpecification>
+        private static readonly List<CoinSpecification> CoinSpecs = new List<CoinSpecification>
         {
-            new CoinSpecification(5.000, 21.21, 5),
-            new CoinSpecification(2.268, 17.91, 10),
-            new CoinSpecification(5.670, 24.26, 25),
-            new CoinSpecification(8, 30, 100)
+            new(5.000, 21.21, 5),
+            new(2.268, 17.91, 10),
+            new(5.670, 24.26, 25),
+            new(8, 30, 100)
         };
         
         public void DropCoin(double weightGrams, double diameterMm)
@@ -30,7 +30,7 @@ namespace VendingMachine
 
         private int GetValueForCoin(double weightGrams, double diameterMm)
         {
-            foreach (var spec in coinSpecs)
+            foreach (var spec in CoinSpecs)
             {
                 if (InTolerance(spec, weightGrams, diameterMm))
                 {
@@ -40,16 +40,11 @@ namespace VendingMachine
             return 0;
         }
 
-        private bool InTolerance(CoinSpecification spec, double weightGrams, double diameterMm)
+        private static bool InTolerance(CoinSpecification spec, double weightGrams, double diameterMm)
         {
-            if (spec.Weight - 0.001 < weightGrams && weightGrams < spec.Weight + 0.001
-                                                  && spec.DiameterMm - 0.001 < diameterMm &&
-                                                  diameterMm < spec.DiameterMm + 0.001)
-            {
-                return true;
-            }
-
-            return false;
+            return spec.Weight - 0.001 < weightGrams && weightGrams < spec.Weight + 0.001
+                                                     && spec.DiameterMm - 0.001 < diameterMm &&
+                                                     diameterMm < spec.DiameterMm + 0.001;
         }
 
     }
@@ -63,8 +58,8 @@ namespace VendingMachine
             Value = value;
         }
 
-        public double Weight { get; set; }
-        public double DiameterMm { get; set; }
-        public int Value { get; set; }
+        public double Weight { get; }
+        public double DiameterMm { get; }
+        public int Value { get; }
     }
 }

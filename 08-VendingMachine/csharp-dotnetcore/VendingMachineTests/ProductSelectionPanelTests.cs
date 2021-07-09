@@ -9,7 +9,6 @@ namespace VendingMachineTests
         [Fact]
         public void PanelHasThreeButtons()
         {
-            var serialBus = new SerialBus();
             var panel = new ProductSelectionPanel();
 
             panel.ButtonList.Count.Should().Be(3);

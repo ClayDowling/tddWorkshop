@@ -6,7 +6,7 @@ namespace VendingMachine
     public class SerialBus
     {
         private string _msg = string.Empty;
-        private readonly List<Action<string>> _subscribers = new List<Action<string>>();
+        private readonly List<Action<string>> _subscribers = new();
 
         public void Send(string msg)
         {

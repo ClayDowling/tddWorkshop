@@ -1,4 +1,4 @@
-namespace VendingMachineTests
+namespace VendingMachine
 {
     public enum ButtonState
     {

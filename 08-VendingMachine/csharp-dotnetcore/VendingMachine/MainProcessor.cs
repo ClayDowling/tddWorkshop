@@ -1,9 +1,7 @@
 using System;
-using System.Threading;
 using System.Threading.Tasks;
-using VendingMachine;
 
-namespace VendingMachineTests
+namespace VendingMachine
 {
     public class MainProcessor
     {
@@ -19,7 +17,7 @@ namespace VendingMachineTests
             Start();
         }
 
-        private void DefaultNoOpAction()
+        private static void DefaultNoOpAction()
         {
         }
 
@@ -30,9 +28,9 @@ namespace VendingMachineTests
                 for (var i = 0; i < ProductSelectionPanel.ButtonList.Count; ++i)
                 {
                     var button = ProductSelectionPanel.ButtonList[i];
-                    if (button.Gpio.State == GpioState.HIGH)
+                    if (button.Gpio.State == GpioState.High)
                     {
-                        button.Gpio.State = GpioState.LOW;
+                        button.Gpio.State = GpioState.Low;
                         _actions[i]();
                     }
                 }

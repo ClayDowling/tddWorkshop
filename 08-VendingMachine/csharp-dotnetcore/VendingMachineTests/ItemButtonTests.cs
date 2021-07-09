@@ -10,14 +10,14 @@ namespace VendingMachineTests
         public void ItemButtonStateIsReleasedByDefault()
         {
             _button.State.Should().Be(ButtonState.Released);
-            _button.Gpio.State.Should().Be(GpioState.LOW);
+            _button.Gpio.State.Should().Be(GpioState.Low);
         }
         
         [Fact]
         public void PressingButtonSetsGpioHigh()
         {
             _button.State = ButtonState.Pressed;
-            _button.Gpio.State.Should().Be(GpioState.HIGH);
+            _button.Gpio.State.Should().Be(GpioState.High);
         }
 
         [Fact]
@@ -25,7 +25,7 @@ namespace VendingMachineTests
         {
             _button.State = ButtonState.Pressed;
             _button.State = ButtonState.Released;
-            _button.Gpio.State.Should().Be(GpioState.LOW);
+            _button.Gpio.State.Should().Be(GpioState.Low);
         }
 
         [Fact]
@@ -34,6 +34,6 @@ namespace VendingMachineTests
             _button.Gpio.Pin.Should().Be(3);
         }
         
-        private ItemButton _button = new ItemButton(3);
+        private readonly ItemButton _button = new(3);
     }
 }

@@ -8,9 +8,9 @@ namespace VendingMachine
         {
             ButtonList = new List<ItemButton>
             {
-                new ItemButton(3),
-                new ItemButton(4),
-                new ItemButton(5)
+                new(3),
+                new(4),
+                new(5)
             };
         }
 

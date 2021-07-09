@@ -1,7 +1,6 @@
 using FluentAssertions;
 using VendingMachine;
 using Xunit;
-using NSubstitute;
 
 namespace VendingMachineTests
 {

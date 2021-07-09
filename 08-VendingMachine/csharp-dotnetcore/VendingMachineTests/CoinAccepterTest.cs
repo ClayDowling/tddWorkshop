@@ -1,6 +1,4 @@
-using System;
 using FluentAssertions;
-using NSubstitute;
 using VendingMachine;
 using Xunit;
 
@@ -8,8 +6,8 @@ namespace VendingMachineTests
 {
     public class CoinAccepterTest
     {
-        private CoinAccepter _accepter;
-        private SerialBus _serialBus;
+        private readonly CoinAccepter _accepter;
+        private readonly SerialBus _serialBus;
 
         public CoinAccepterTest()
         {
@@ -32,7 +30,7 @@ namespace VendingMachineTests
         public void RejectsSlug()
         {
             _accepter.DropCoin(5.7, 18);
-            _serialBus.Recv().Should().Be(String.Empty);
+            _serialBus.Recv().Should().Be(string.Empty);
         }
 
         [Fact]
