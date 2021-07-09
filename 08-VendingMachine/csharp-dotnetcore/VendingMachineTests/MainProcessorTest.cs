@@ -10,9 +10,6 @@ namespace VendingMachineTests
         [Fact]
         public void ProcessorHasButtonActions()
         {
-            // TODO: weak test
-            _mainProcessor.ProductSelectionPanel.Should().NotBeNull();
-
             _buttonsPressedForTesting[0].Should().BeFalse();
             _buttonsPressedForTesting[1].Should().BeFalse();
             _buttonsPressedForTesting[2].Should().BeFalse();

@@ -48,11 +48,6 @@ namespace VendingMachineTests
         {
             _actions[i] = action;
         }
-
-        // TODO: need async loop to sniff for button presses
-        public void StopProcessorForTesting()
-        {
-            
-        }
+        
     }
 }
