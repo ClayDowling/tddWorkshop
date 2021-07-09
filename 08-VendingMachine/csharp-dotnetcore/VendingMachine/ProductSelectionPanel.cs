@@ -14,6 +14,6 @@ namespace VendingMachine
             };
         }
 
-        public List<ItemButton> ButtonList { get; set; }
+        public List<ItemButton> ButtonList { get; }
     }
 }
