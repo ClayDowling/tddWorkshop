@@ -4,6 +4,7 @@ using Xunit;
 
 namespace VendingMachineTests
 {
+    // TODO: we should get the message from the main processor and not the display
     public class CoinAccepterDisplayIntegrationTest
     {
         private readonly CoinAccepter _accepter;
