@@ -19,13 +19,13 @@ _So that I can collect money from the customer_
 ✔ The vending machine will accept valid coins (nickels, dimes, and quarters) and
 reject invalid ones (pennies).
 
-(partial) When a valid coin is inserted the amount of the
+✔  When a valid coin is inserted the amount of the
 coin will be added to the current amount and the display will be updated.
 
 ✔ When
 there are no coins inserted, the machine displays INSERT COIN.  
 
-Rejected coins
+✔ Rejected coins
 are placed in the coin return.
 
 *NOTE:* Coin acceptors do not know about quarters, nickels, dimes, or game

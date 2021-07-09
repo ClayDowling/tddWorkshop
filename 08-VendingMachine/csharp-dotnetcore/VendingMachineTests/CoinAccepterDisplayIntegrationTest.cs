@@ -9,7 +9,6 @@ namespace VendingMachineTests
     {
         private readonly CoinAccepter _accepter;
         private readonly Display _display;
-        private readonly SerialBus _serialBus;
 
         [Fact]
         public void CoinAccepterSendsMessageToDisplay()
@@ -20,9 +19,9 @@ namespace VendingMachineTests
 
         public CoinAccepterDisplayIntegrationTest()
         {
-            _serialBus = new SerialBus();
-            _accepter = new CoinAccepter(_serialBus);
-            _display = new Display(_serialBus);
+            var serialBus = new SerialBus();
+            _accepter = new CoinAccepter(serialBus);
+            _display = new Display(serialBus);
         }
     }
 }
