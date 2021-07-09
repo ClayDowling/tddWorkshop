@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using FluentAssertions;
 using Xunit;
@@ -30,21 +31,16 @@ namespace VendingMachineTests
             
         }
 
-        private void ButtonActionForTesting(int button)
+        private Action ButtonActionForTesting(int button)
         {
-            
-        }
-        
-        private void ButtonZeroActionForTesting()
-        {
-            _buttonsPressedForTesting[0] = true;
+            return () => _buttonsPressedForTesting[button] = true;
         }
         
         public MainProcessorTest()
         {
             _mainProcessor = new MainProcessor();
             _buttonsPressedForTesting = new bool[3];
-            _mainProcessor.AttachActionForButton(0, ButtonZeroActionForTesting);
+            _mainProcessor.AttachActionForButton(0, ButtonActionForTesting(0));
         }
 
         private readonly MainProcessor _mainProcessor;
