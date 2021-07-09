@@ -3,20 +3,21 @@ using System.Collections.Generic;
 
 namespace Katas
 {
-    public class RealSubscriberService : SubscriberService
+    public class RealSubscriberService : ISubscriberService
     {
-        Random random = new Random();
-        public List<string> GetSubscribersThatWillExpireBetweenNowAndDate(int day, int month, int year)
+        
+        public List<string> GetSubscribersThatWillExpireBetweenNowAndDate(DateTime selectedDate)
         {
+            Random random = new Random();
             if (random.NextDouble() < 0.5)
-			{
-				return null;
-			}
-			else
-			{
-                String[] strings = { "mysterious email" + random.Next()};
-				return new List<string>(strings);
-			}
+            {
+                return null;
+            }
+            else
+            {
+                String[] strings = { "mysterious email" + random.Next() };
+                return new List<string>(strings);
+            }
         }
     }
 }
