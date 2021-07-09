@@ -44,7 +44,7 @@ namespace VendingMachineTests
         }
 
         private readonly MainProcessor _mainProcessor;
-        private bool[] _buttonsPressedForTesting;
+        private readonly bool[] _buttonsPressedForTesting;
 
     }
 }
