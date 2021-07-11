@@ -4,6 +4,7 @@ using FluentAssertions;
 
 namespace VendingMachineTests
 {
+    // TODO: Display test needs to be HIL
     public class DisplayTest
     {
         [Fact]

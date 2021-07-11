@@ -5,15 +5,19 @@ namespace VendingMachine
 {
     public class MainProcessor
     {
+        private readonly SerialBus _serialBus;
         private readonly Action[] _actions;
+        private int _availableCash;
 
-        public MainProcessor()
+        public MainProcessor(SerialBus serialBus)
         {
+            _serialBus = serialBus;
             ProductSelectionPanel = new ProductSelectionPanel();
             _actions = new Action[3];
             _actions[0] = DefaultNoOpAction;
             _actions[1] = DefaultNoOpAction;
             _actions[2] = DefaultNoOpAction;
+            _availableCash = 0;
             Start();
         }
 
@@ -34,6 +38,11 @@ namespace VendingMachine
                         _actions[i]();
                     }
                 }
+
+                var message = _serialBus.Recv();
+                if (message != string.Empty)
+                    _availableCash = int.Parse(message);
+                
                 await Task.Delay(50);
             }
             // ReSharper disable once FunctionNeverReturns
@@ -46,6 +55,10 @@ namespace VendingMachine
         {
             _actions[i] = action;
         }
-        
+
+        public int AvailableCash()
+        {
+            return _availableCash;
+        }
     }
 }

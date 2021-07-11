@@ -46,7 +46,7 @@ namespace VendingMachineTests
         
         public MainProcessorButtonPanelIntegrationTest()
         {
-            _mainProcessor = new MainProcessor();
+            _mainProcessor = new MainProcessor(new SerialBus());
             _buttonsPressedForTesting = new bool[3];
             _mainProcessor.AttachActionForButton(0, ButtonActionForTesting(0));
             _mainProcessor.AttachActionForButton(1, ButtonActionForTesting(1));

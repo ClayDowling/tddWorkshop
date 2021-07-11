@@ -1,3 +1,4 @@
+using VendingMachine;
 using Xunit;
 
 namespace VendingMachineTests
@@ -11,12 +12,26 @@ namespace VendingMachineTests
      * and the price of the item and subsequent checks of the display will display
      * either INSERT COIN or the current amount as appropriate.
      */
-    public class ProductSelectionActionTest
+    public class ProductSelectionTest
     {
+        // TODO: add relationship with coin accepter via MainProcessor
+        private readonly SerialBus _serialBus = new();
+        
         [Fact]
-        public void Foo()
+        public void ProductSelectedWithEnoughMoney()
         {
-            // TODO
+            var cola = new ProductSelection(100, _serialBus);
+            cola.Select();
+            // TODO Test was selected because enough money
         }
+        
+        [Fact]
+        public void ProductSelectedWithoutEnoughMoney()
+        {
+            var cola = new ProductSelection(100, _serialBus);
+            cola.Select();
+            // TODO Test was not selected because not enough money
+        }
+        
     }
 }
