@@ -44,6 +44,9 @@ Canada, and currency of both countries will be present.  Your machine should
 accept only U.S. or only Canadian coins of 5 cents or higher.  You may choose
 to accept dollar coins or not.
 
+Your machine should always reject euro coins or the Canadian twonie, which feel
+superficially like a U.S. quarter.
+
 *NOTE:* Coin acceptors do not know about quarters, nickels, dimes, or game
 tokens.  They distinguish coins by a combination of diameter and weight.  Your
 code should reflect that for determining what kind of coin has been inserted.
