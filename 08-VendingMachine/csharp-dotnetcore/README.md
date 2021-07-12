@@ -34,11 +34,18 @@ _As a vendor_
 _I want a vending machine that accepts coins_  
 _So that I can collect money from the customer_  
 
-The vending machine will accept valid coins (nickels, dimes, and quarters) and
-reject invalid ones (pennies).  When a valid coin is inserted the amount of the
-coin will be added to the current amount and the display will be updated.  When
-there are no coins inserted, the machine displays INSERT COIN.  Rejected coins
-are placed in the coin return.
+The vending machine will accept valid coins and reject invalid ones.  When a
+valid coin is inserted the amount of the coin will be added to the current
+amount and the display will be updated.  When there are no coins inserted, the
+machine displays INSERT COIN.  Rejected coins are placed in the coin return.
+
+Assume that your vending machine will be operating near the U.S. border with
+Canada, and currency of both countries will be present.  Your machine should
+accept only U.S. or only Canadian coins of 5 cents or higher.  You may choose
+to accept dollar coins or not.
+
+Your machine should always reject euro coins or the Canadian twonie, which feel
+superficially like a U.S. quarter.
 
 *NOTE:* Coin acceptors do not know about quarters, nickels, dimes, or game
 tokens.  They distinguish coins by a combination of diameter and weight.  Your
