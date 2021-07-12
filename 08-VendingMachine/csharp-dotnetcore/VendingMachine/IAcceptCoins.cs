@@ -10,9 +10,9 @@ namespace VendingMachine
     {
         double currentAmount { get; set; }
 
-        double AcceptCoins(Coins coins);
+        double AcceptCoins(double weightOfCoin, double diameterOfCoin);
 
-        bool ValidateCoins(Coins coins);
+        int ValidateCoins(double weightOfCoin, double diameterOfCoin);
 
     }
 }

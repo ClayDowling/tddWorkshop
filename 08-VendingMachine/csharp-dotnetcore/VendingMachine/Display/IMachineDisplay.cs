@@ -2,6 +2,6 @@
 {
     public interface IMachineDisplay
     {
-        string DisplayMessage(string message);
+        void DisplayMessage(string message);
     }
 }

@@ -7,49 +7,62 @@ namespace VendingMachineTests
 {
     public class AcceptCoinsTest
     {
-        //private IAcceptCoins acceptCoins= NSubstitute.Substitute.For<IAcceptCoins>();
-        //private IValueOfCoin valueOfCoin = NSubstitute.Substitute.For<IValueOfCoin>();
+        public AcceptCoinsTest()
+        {
+            serialBus = new SerialBus();
+            acceptCoins = new AcceptCoin(serialBus);
+        }
+        private IAcceptCoins acceptCoins;
+        private SerialBus serialBus;
 
-        private IAcceptCoins acceptCoins = new AcceptCoin();
+        const int Nickle = 5;
+        const int Dime = 10;
+        const int Quarters = 25;
+
+        const double WeightOfNickle = 5.00;
+        const double WeightOfQuater = 5.67;
+        const double WeightOfDime = 2.268;
+
+        const double DiameterOfNickle = 21.21;
+        const double DiameterofQuater = 24.26;
+        const double DiameterofDime = 17.91;
 
         [Theory]
-        [InlineData(Coins.pennies, false)]
-        [InlineData(Coins.nickels, true)]
-        [InlineData(Coins.dimes, true)]
-        [InlineData(Coins.quarters, true)]
-        public void ValidateCoinsTest(Coins coins, bool expected)
+        [InlineData(Nickle, WeightOfNickle, DiameterOfNickle)]
+        [InlineData(Dime, WeightOfDime, DiameterofDime)]
+        [InlineData(Quarters, WeightOfQuater, DiameterofQuater)]
+        public void AcceptCoinsTestFor(double expectedvalue, double weightOfCoin, double diameterOfCoin)
         {
-            acceptCoins.ValidateCoins(coins).Should().Be(expected);
+            acceptCoins.AcceptCoins( weightOfCoin, diameterOfCoin).Should().Be(expectedvalue);
 
         }
 
         [Theory]
-        [InlineData(Coins.nickels, 5)]
-        [InlineData(Coins.dimes, 10)]
-        [InlineData(Coins.quarters, 25)]
-
-        public void AcceptCoinsTestFor(Coins coins, double expectedvalue)
+        [InlineData(2.5, 19.05)]
+        [InlineData(3.2, 23.56)]
+        [InlineData(3.5, 24.05)]
+        [InlineData(5.5, 23.05)]
+        public void RejectInvalidCoins(double weightOfCoin, double diameterOfCoin)
         {
-            acceptCoins.AcceptCoins(coins).Should().Be(expectedvalue);
+            acceptCoins.AcceptCoins(weightOfCoin, diameterOfCoin).Should().Be(0);
 
         }
 
-        [Fact]
+       [Fact]
         public void AcceptCoinsTestForCurrentAmmountQuartersAndDimes()
         {
-            acceptCoins.AcceptCoins(Coins.quarters).Should().Be(25);
-            acceptCoins.AcceptCoins(Coins.dimes).Should().Be(35);
-            acceptCoins.AcceptCoins(Coins.nickels).Should().Be(40);
-            acceptCoins.AcceptCoins(Coins.quarters).Should().Be(65);
+            acceptCoins.AcceptCoins(WeightOfNickle, DiameterOfNickle).Should().Be(Nickle);
+            acceptCoins.AcceptCoins(WeightOfDime, DiameterofDime).Should().Be(Nickle+Dime);
+            acceptCoins.AcceptCoins(WeightOfQuater, DiameterofQuater).Should().Be(Nickle + Dime+ Quarters);
+            acceptCoins.AcceptCoins(WeightOfQuater, DiameterofQuater).Should().Be(Nickle + Dime + Quarters+ Quarters);
+
         }
-        //If there is not enough money inserted then the machine displays
-        //PRICE and the price of the item and subsequent checks of the display will
-        //display either INSERT COIN or the current amount as appropriate
+
 
         [Fact]
-        public void DisplayProductsWhenNotEnoughMoneyInserted()
+        public void DisplayMessageInsertCoinsWhenNoCoins()
         {
-
+             serialBus.Recv().Should().Be("Insert Coins");
         }
 
     }

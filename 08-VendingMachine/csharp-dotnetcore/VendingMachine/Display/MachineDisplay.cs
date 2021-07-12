@@ -2,9 +2,9 @@
 {
     public  class MachineDisplay : IMachineDisplay
     {
-        public string DisplayMessage(string message)
+        public void DisplayMessage(string message)
         {
-            return message;
+            System.Console.WriteLine(message);
         }
     }
 }

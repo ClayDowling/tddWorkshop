@@ -11,32 +11,39 @@ namespace VendingMachine
     {
         private IValueOfCoin valueOfCoin = new ValueOfCoins();
         private IMachineDisplay machineDisplay = new MachineDisplay();
-        //public AcceptCoin (IValueOfCoin valueOfCoin)
-        //{
-        //    this.valueOfCoin = valueOfCoin;
-        //}
+        private SerialBus _serialBus;
 
        public double currentAmount { get; set; }
-       public double AcceptCoins(Coins coins)
+
+       public AcceptCoin(SerialBus serialBus)
         {
-            if(ValidateCoins(coins))
-            {
-                currentAmount += valueOfCoin.ValueOfCoin(coins);
-                machineDisplay.DisplayMessage(currentAmount.ToString());
-            }
+            _serialBus = serialBus;
+            _serialBus.Send("Insert Coins");
+        }
+       public double AcceptCoins(double weightOfCoin, double diameterOfCoin)
+        {
+            
+            int denomianitaion = ValidateCoins(weightOfCoin, diameterOfCoin);
+            currentAmount += denomianitaion;
 
             return currentAmount;
+
             
         }
 
-        public  bool ValidateCoins(Coins coins)
+        public int ValidateCoins(double weightOfCoin, double diameterOfCoin)
         {
-            bool validate = false;
-            if (coins == Coins.quarters || coins == Coins.nickels || coins == Coins.dimes)
-                validate = true;
-            else if (coins == Coins.pennies)
-                validate = false;
-            return validate;
+            int valueOfInsertedCoin=0;
+
+            if (weightOfCoin == 5.00 && diameterOfCoin == 21.21)
+                valueOfInsertedCoin = 5;
+            else if (weightOfCoin == 2.268 && diameterOfCoin == 17.91)
+                valueOfInsertedCoin = 10;
+            else if (weightOfCoin == 5.67 && diameterOfCoin == 24.26)
+                valueOfInsertedCoin = 25;
+
+
+            return valueOfInsertedCoin;
         }
 
     }

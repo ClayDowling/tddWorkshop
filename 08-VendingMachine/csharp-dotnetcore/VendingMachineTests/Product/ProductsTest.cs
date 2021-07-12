@@ -12,28 +12,28 @@ namespace VendingMachineTests.Product
 {
     public class ProductsTest
     {
-        private IAcceptCoins acceptCoins = new AcceptCoin();
-        Products products = new Products();
-        [Fact]
-        public void TestWeHaveAllTheProducts()
-        {
+        //private IAcceptCoins acceptCoins = new AcceptCoin();
+        //Products products = new Products();
+        //[Fact]
+        //public void TestWeHaveAllTheProducts()
+        //{
           
-            products.productsList.Count().Should().Be(3);
-        }
+        //    products.productsList.Count().Should().Be(3);
+        //}
 
 
-        [Fact]
-        public void ColaProductIsDispensedFromMachineTest()
-        {
-            acceptCoins.AcceptCoins(Coins.quarters);
-            acceptCoins.AcceptCoins(Coins.quarters);
-            acceptCoins.AcceptCoins(Coins.quarters);
-            acceptCoins.AcceptCoins(Coins.quarters);
+        //[Fact(Skip = "Not Ready")]
+        //public void ColaProductIsDispensedFromMachineTest()
+        //{
+        //    //acceptCoins.AcceptCoins(Coins.quarters);
+        //    //acceptCoins.AcceptCoins(Coins.quarters);
+        //    //acceptCoins.AcceptCoins(Coins.quarters);
+        //    //acceptCoins.AcceptCoins(Coins.quarters);
 
-            products.CheckEligibilityOfProductWithCurrentAmount(acceptCoins.currentAmount, "cola").Should().Be(true);
+        //    //products.CheckEligibilityOfProductWithCurrentAmount(acceptCoins.currentAmount, "cola").Should().Be(true);
 
 
 
-        }
+        //}
     }
 }
