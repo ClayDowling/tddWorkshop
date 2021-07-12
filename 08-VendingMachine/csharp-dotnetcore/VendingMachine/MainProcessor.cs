@@ -8,10 +8,12 @@ namespace VendingMachine
         private readonly SerialBus _serialBus;
         private readonly Action[] _actions;
         private int _availableCash;
+        private SerialBus _displayBus;
 
         public MainProcessor(SerialBus serialBus)
         {
             _serialBus = serialBus;
+            _displayBus = new SerialBus();
             ProductSelectionPanel = new ProductSelectionPanel();
             _actions = new Action[3];
             _actions[0] = DefaultNoOpAction;
@@ -42,11 +44,17 @@ namespace VendingMachine
                 var message = _serialBus.Recv();
                 if (message != string.Empty)
                     _availableCash = int.Parse(message);
+                SendDisplayMessage();
                 
-                await Task.Delay(50);
+                await Task.Delay(20);
             }
             // ReSharper disable once FunctionNeverReturns
             // This thread should die when the main testing thread stops executing
+        }
+
+        private void SendDisplayMessage()
+        {
+            _displayBus.Send($"{_availableCash} cents");
         }
 
         public ProductSelectionPanel ProductSelectionPanel { get; }
@@ -59,6 +67,11 @@ namespace VendingMachine
         public int AvailableCash()
         {
             return _availableCash;
+        }
+
+        public SerialBus DisplayBus()
+        {
+            return _displayBus;
         }
     }
 }
