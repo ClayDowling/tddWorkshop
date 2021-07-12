@@ -12,9 +12,9 @@ namespace VendingMachineTests
 
         [Theory]
         [InlineData(Coins.pennies, 0.01)]
-        [InlineData(Coins.nickels, 0.05)]
-        [InlineData(Coins.dimes, 0.10)]
-        [InlineData(Coins.quarters, 0.25)]
+        [InlineData(Coins.nickels, 5)]
+        [InlineData(Coins.dimes, 10)]
+        [InlineData(Coins.quarters, 25)]
         public void ValidateValueOfCoins(Coins coins, double expectedvalue)
         {
             valueOfCoin.ValueOfCoin(coins).Should().Be(expectedvalue);

@@ -8,12 +8,11 @@ namespace VendingMachine
 {
     public interface IAcceptCoins
     {
+        double currentAmount { get; set; }
+
         double AcceptCoins(Coins coins);
 
         bool ValidateCoins(Coins coins);
-
-        string DisplayMessage(string message);
-
 
     }
 }

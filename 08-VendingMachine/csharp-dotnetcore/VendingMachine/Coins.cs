@@ -7,7 +7,5 @@ using System.Threading.Tasks;
 namespace VendingMachine
 {
     public enum Coins { nickels , dimes, quarters, pennies }
-
-
     
 }
