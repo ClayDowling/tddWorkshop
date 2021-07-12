@@ -19,26 +19,46 @@ namespace VendingMachineTests
         private const int ColaButton = 0;
         private MainProcessor _mainProcessor;
         private readonly ProductSelection _cola;
+        private readonly SerialBus _serialBus;
 
         [Fact]
         public void ProductSelectedWithEnoughMoney()
         {
+            _serialBus.Send("100");
+            Thread.Sleep(60);
             _mainProcessor.ProductSelectionPanel.ButtonList[ColaButton].State = ButtonState.Pressed;
             Thread.Sleep(60);
             _mainProcessor.DisplayBus().Recv().Should().Be("Thank You");
+            Thread.Sleep(4000);
+            _mainProcessor.DisplayBus().Recv().Should().Be("Insert Coin");
         }
         
         [Fact]
-        public void ProductSelectedWithoutEnoughMoney()
+        public void ProductSelectedWithNoMoney()
         {
-            _cola.Select();
-            // TODO Test was not selected because not enough money
+            _mainProcessor.ProductSelectionPanel.ButtonList[ColaButton].State = ButtonState.Pressed;
+            Thread.Sleep(60);
+            _mainProcessor.DisplayBus().Recv().Should().Be("Price 100");
+            Thread.Sleep(4000);
+            _mainProcessor.DisplayBus().Recv().Should().Be("Insert Coin");
         }
 
+        [Fact]
+        public void ProductSelectedWithoutEnoughMoney()
+        {
+            _serialBus.Send("10");
+            Thread.Sleep(60);
+            _mainProcessor.ProductSelectionPanel.ButtonList[ColaButton].State = ButtonState.Pressed;
+            Thread.Sleep(60);
+            _mainProcessor.DisplayBus().Recv().Should().Be("Price 100");
+            Thread.Sleep(4000);
+            _mainProcessor.DisplayBus().Recv().Should().Be("10 cents");
+        }
+        
         public ProductSelectionTest()
         {
-            var serialBus = new SerialBus();
-            _mainProcessor = new MainProcessor(serialBus);
+            _serialBus = new SerialBus();
+            _mainProcessor = new MainProcessor(_serialBus);
             _cola = new ProductSelection( _mainProcessor, 100);
             _mainProcessor.AttachActionForButton(0, _cola.Select);
         }
