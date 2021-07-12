@@ -2,18 +2,19 @@ namespace VendingMachine
 {
     public class ProductSelection
     {
+        private readonly MainProcessor _mainProcessor;
         private readonly int _cost;
-        private readonly SerialBus _serialBus;
 
-        public ProductSelection(int cost, SerialBus serialBus)
+        public ProductSelection(MainProcessor mainProcessor, int cost)
         {
+            _mainProcessor = mainProcessor;
             _cost = cost;
-            _serialBus = serialBus;
         }
 
         public void Select()
         {
-            
+            // TODO: move this to the processor loop?
+            _mainProcessor.DisplayBus().Send("Thank You");
         }
     }
 }

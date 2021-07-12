@@ -43,9 +43,11 @@ namespace VendingMachine
 
                 var message = _serialBus.Recv();
                 if (message != string.Empty)
+                {
                     _availableCash = int.Parse(message);
-                SendDisplayMessage();
-                
+                    SendDisplayMessage();
+                }
+
                 await Task.Delay(20);
             }
             // ReSharper disable once FunctionNeverReturns

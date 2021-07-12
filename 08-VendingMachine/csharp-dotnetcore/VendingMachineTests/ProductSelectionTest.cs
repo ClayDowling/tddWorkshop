@@ -1,3 +1,5 @@
+using System.Threading;
+using FluentAssertions;
 using VendingMachine;
 using Xunit;
 
@@ -14,23 +16,31 @@ namespace VendingMachineTests
      */
     public class ProductSelectionTest
     {
-        // TODO: add relationship with coin accepter via MainProcessor
-        private readonly SerialBus _serialBus = new();
-        
+        private const int ColaButton = 0;
+        private MainProcessor _mainProcessor;
+        private readonly ProductSelection _cola;
+
         [Fact]
         public void ProductSelectedWithEnoughMoney()
         {
-            var cola = new ProductSelection(100, _serialBus);
-            cola.Select();
-            // TODO Test was selected because enough money
+            _mainProcessor.ProductSelectionPanel.ButtonList[ColaButton].State = ButtonState.Pressed;
+            Thread.Sleep(60);
+            _mainProcessor.DisplayBus().Recv().Should().Be("Thank You");
         }
         
         [Fact]
         public void ProductSelectedWithoutEnoughMoney()
         {
-            var cola = new ProductSelection(100, _serialBus);
-            cola.Select();
+            _cola.Select();
             // TODO Test was not selected because not enough money
+        }
+
+        public ProductSelectionTest()
+        {
+            var serialBus = new SerialBus();
+            _mainProcessor = new MainProcessor(serialBus);
+            _cola = new ProductSelection( _mainProcessor, 100);
+            _mainProcessor.AttachActionForButton(0, _cola.Select);
         }
         
     }
