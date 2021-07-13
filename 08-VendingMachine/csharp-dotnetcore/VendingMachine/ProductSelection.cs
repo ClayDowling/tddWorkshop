@@ -19,6 +19,8 @@ namespace VendingMachine
             {
                 _mainProcessor.DisplayBus().Send($"Price {_cost}");
             }
+
+            _mainProcessor.StartDisplayMessageTimeout();
         }
     }
 }

@@ -9,6 +9,7 @@ namespace VendingMachine
         private readonly Action[] _actions;
         private int _availableCash;
         private SerialBus _displayBus;
+        private long _timeoutEnd = -1;
 
         public MainProcessor(SerialBus serialBus)
         {
@@ -48,6 +49,12 @@ namespace VendingMachine
                     SendDisplayMessage();
                 }
 
+                if (_timeoutEnd >= 0 && _timeoutEnd < DateTime.Now.Ticks)
+                {
+                    SendDisplayMessage();
+                    _timeoutEnd = -1;
+                }
+
                 await Task.Delay(20);
             }
             // ReSharper disable once FunctionNeverReturns
@@ -56,7 +63,12 @@ namespace VendingMachine
 
         private void SendDisplayMessage()
         {
-            _displayBus.Send($"{_availableCash} cents");
+            if(_availableCash > 0)
+                _displayBus.Send($"{_availableCash} cents");
+            else 
+            {
+                _displayBus.Send($"Insert Coin");
+            }
         }
 
         public ProductSelectionPanel ProductSelectionPanel { get; }
@@ -74,6 +86,11 @@ namespace VendingMachine
         public SerialBus DisplayBus()
         {
             return _displayBus;
+        }
+
+        public void StartDisplayMessageTimeout()
+        {
+            _timeoutEnd = DateTime.Now.Ticks + (2500 * TimeSpan.TicksPerMillisecond);
         }
     }
 }
