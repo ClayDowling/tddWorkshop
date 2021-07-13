@@ -33,7 +33,19 @@ namespace VendingMachineTests
             _mainProcessor.DisplayBus().Recv().Should().Be("Insert Coin");
         }
         
-        // TODO: product selection when too much money (drop change)
+        [Fact]
+        public void ProductSelectedWithTooMuchMoney()
+        {
+            _serialBus.Send("110");
+            Thread.Sleep(60);
+            _mainProcessor.ProductSelectionPanel.ButtonList[ColaButton].State = ButtonState.Pressed;
+            Thread.Sleep(60);
+            _mainProcessor.DisplayBus().Recv().Should().Be("Thank You");
+            Thread.Sleep(4000);
+            _mainProcessor.DisplayBus().Recv().Should().Be("Insert Coin");
+            
+            // TODO: how to verify change was given?
+        }
         
         [Fact]
         public void ProductSelectedWithNoMoney()

@@ -96,6 +96,12 @@ namespace VendingMachine
         public void PersistSale(int cost)
         {
             _availableCash -= cost;
+            if (_availableCash > 0)
+            {
+                // TODO: give change
+                _availableCash = 0;
+            }
+            // TODO: do we track sales?
         }
     }
 }
