@@ -52,7 +52,9 @@ namespace VendingMachineTests
         public void AcceptCoinsTestForCurrentAmmountQuartersAndDimes()
         {
             acceptCoins.AcceptCoins(WeightOfNickle, DiameterOfNickle).Should().Be(Nickle);
+            serialBus.Recv().Should().Be(Nickle.ToString());
             acceptCoins.AcceptCoins(WeightOfDime, DiameterofDime).Should().Be(Nickle+Dime);
+            serialBus.Recv().Should().Be((Nickle + Dime).ToString());
             acceptCoins.AcceptCoins(WeightOfQuater, DiameterofQuater).Should().Be(Nickle + Dime+ Quarters);
             acceptCoins.AcceptCoins(WeightOfQuater, DiameterofQuater).Should().Be(Nickle + Dime + Quarters+ Quarters);
 
@@ -65,5 +67,25 @@ namespace VendingMachineTests
              serialBus.Recv().Should().Be("Insert Coins");
         }
 
+        [Fact]
+        public void DisplayMessageCurrentAmount()
+        {
+            acceptCoins.AcceptCoins(WeightOfQuater, DiameterofQuater);
+            serialBus.Recv().Should().Be(Quarters.ToString());
+        }
+
+        [Fact]
+        public void InvalidCoinInsertedTest()
+        {
+            acceptCoins.AcceptCoins(26.45, 34.55);
+            serialBus.Recv().Should().Be("Insert Coins");
+        }
+
+        [Fact]
+        public void IdleCoinAccepterTest()
+        {
+            acceptCoins.AcceptCoins(0, 0);
+            serialBus.Recv().Should().Be("Insert Coins");
+        }
     }
 }

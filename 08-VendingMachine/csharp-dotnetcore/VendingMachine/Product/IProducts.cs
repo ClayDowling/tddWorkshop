@@ -8,6 +8,8 @@ namespace VendingMachine.Product
 {
     public interface IProducts
     {
-        bool CheckEligibilityOfProductWithCurrentAmount(double currentAmount, string product);
+        bool CheckProductExistsInMachine();
+        bool CheckEligibility();
+       // bool CheckEligibilityOfProductWithCurrentAmount(double weightOfCoin, double diameterOfCoin, string product);
     }
 }

@@ -13,27 +13,31 @@ namespace VendingMachine
         private IMachineDisplay machineDisplay = new MachineDisplay();
         private SerialBus _serialBus;
 
-       public double currentAmount { get; set; }
+        public double currentAmount { get; set; }
 
-       public AcceptCoin(SerialBus serialBus)
+        public AcceptCoin(SerialBus serialBus)
         {
             _serialBus = serialBus;
             _serialBus.Send("Insert Coins");
         }
-       public double AcceptCoins(double weightOfCoin, double diameterOfCoin)
+        public double AcceptCoins(double weightOfCoin, double diameterOfCoin)
         {
-            
-            int denomianitaion = ValidateCoins(weightOfCoin, diameterOfCoin);
-            currentAmount += denomianitaion;
+
+            int denomination = ValidateCoins(weightOfCoin, diameterOfCoin);
+            if (denomination > 0)
+            {
+                currentAmount += denomination;
+                _serialBus.Send(currentAmount.ToString());
+            }
 
             return currentAmount;
 
-            
+
         }
 
         public int ValidateCoins(double weightOfCoin, double diameterOfCoin)
         {
-            int valueOfInsertedCoin=0;
+            int valueOfInsertedCoin = 0;
 
             if (weightOfCoin == 5.00 && diameterOfCoin == 21.21)
                 valueOfInsertedCoin = 5;
