@@ -13,8 +13,11 @@ namespace VendingMachine
 
         public void Select()
         {
-            if(_mainProcessor.AvailableCash() >= _cost)
+            if (_mainProcessor.AvailableCash() >= _cost)
+            {
                 _mainProcessor.DisplayBus().Send("Thank You");
+                _mainProcessor.PersistSale(_cost);
+            }
             else
             {
                 _mainProcessor.DisplayBus().Send($"Price {_cost}");

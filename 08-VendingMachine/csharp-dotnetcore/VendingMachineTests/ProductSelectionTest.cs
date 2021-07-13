@@ -21,7 +21,7 @@ namespace VendingMachineTests
         private readonly ProductSelection _cola;
         private readonly SerialBus _serialBus;
 
-        [Fact(Skip = "need logic to subtract amount after dispensing")]
+        [Fact]
         public void ProductSelectedWithEnoughMoney()
         {
             _serialBus.Send("100");
@@ -32,6 +32,8 @@ namespace VendingMachineTests
             Thread.Sleep(4000);
             _mainProcessor.DisplayBus().Recv().Should().Be("Insert Coin");
         }
+        
+        // TODO: product selection when too much money (drop change)
         
         [Fact]
         public void ProductSelectedWithNoMoney()

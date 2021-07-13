@@ -92,5 +92,10 @@ namespace VendingMachine
         {
             _timeoutEnd = DateTime.Now.Ticks + (2500 * TimeSpan.TicksPerMillisecond);
         }
+
+        public void PersistSale(int cost)
+        {
+            _availableCash -= cost;
+        }
     }
 }
