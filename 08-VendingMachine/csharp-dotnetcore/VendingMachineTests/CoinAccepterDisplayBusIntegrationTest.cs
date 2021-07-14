@@ -22,7 +22,7 @@ namespace VendingMachineTests
         {
             var serialBus = new SerialBus();
             _accepter = new CoinAccepter(serialBus);
-            _mainProcessor =  new MainProcessor(serialBus);
+            _mainProcessor =  new MainProcessor(serialBus, 10, 20, 30);
         }
     }
 }

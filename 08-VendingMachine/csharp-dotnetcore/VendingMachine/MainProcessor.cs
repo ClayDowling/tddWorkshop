@@ -8,26 +8,24 @@ namespace VendingMachine
         private readonly SerialBus _serialBus;
         private readonly Action[] _actions;
         private int _availableCash;
-        private SerialBus _displayBus;
+        private readonly SerialBus _displayBus;
         private long _timeoutEnd = -1;
-
-        public MainProcessor(SerialBus serialBus)
+        
+        public MainProcessor(SerialBus serialBus, int costForButton1, int costForButton2, int costForButton3)
         {
             _serialBus = serialBus;
             _displayBus = new SerialBus();
             ProductSelectionPanel = new ProductSelectionPanel();
             _actions = new Action[3];
-            _actions[0] = DefaultNoOpAction;
-            _actions[1] = DefaultNoOpAction;
-            _actions[2] = DefaultNoOpAction;
+
+            AttachActionForButton(0, new ProductSelection( this, costForButton1).Select);
+            AttachActionForButton(1, new ProductSelection( this, costForButton2).Select);
+            AttachActionForButton(2, new ProductSelection( this, costForButton3).Select);
+
             _availableCash = 0;
             Start();
         }
-
-        private static void DefaultNoOpAction()
-        {
-        }
-
+        
         private async void Start()
         {
             while (true)
@@ -73,7 +71,7 @@ namespace VendingMachine
 
         public ProductSelectionPanel ProductSelectionPanel { get; }
 
-        public void AttachActionForButton(int i, Action action)
+        private void AttachActionForButton(int i, Action action)
         {
             _actions[i] = action;
         }

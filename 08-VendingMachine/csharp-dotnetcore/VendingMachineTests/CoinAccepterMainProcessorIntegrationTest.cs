@@ -22,7 +22,7 @@ namespace VendingMachineTests
         public CoinAccepterMainProcessorIntegrationTest()
         {
             _serialBus = new SerialBus();
-            _mainProcessor = new MainProcessor(_serialBus);
+            _mainProcessor = new MainProcessor(_serialBus, 10, 20, 30);
             _coinAccepter = new CoinAccepter(_serialBus);
         }
     }
