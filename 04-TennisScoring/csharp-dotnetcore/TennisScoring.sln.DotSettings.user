@@ -1,0 +1,7 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=0f292b84_002Db8d8_002D4ade_002Da809_002D7e2f25d70de0/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from &amp;lt;TennisScoringTest&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;Project Location="/Users/todd.a.flanders/common/workspaces/cnhi/sandbox/claytdd/tddWorkshop/04-TennisScoring/csharp-dotnetcore/TennisScoringTest" Presentation="&amp;lt;TennisScoringTest&amp;gt;" /&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=34a0232d_002Dc48f_002D4dff_002Da069_002D9d4bf557a1c8/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="TennisGameEasyTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;Project Location="/Users/todd.a.flanders/common/workspaces/cnhi/sandbox/claytdd/tddWorkshop/04-TennisScoring/csharp-dotnetcore/TennisScoringTest" Presentation="&amp;lt;TennisScoringTest&amp;gt;" /&gt;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
